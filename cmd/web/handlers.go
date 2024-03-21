@@ -16,6 +16,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 	files := []string{
 		"cmd/ui/html/base.tmpl",
+		"cmd/ui/html/partials/nav.tmpl",
 		"cmd/ui/html/pages/home.tmpl",
 	}
 
@@ -26,7 +27,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = ts.Execute(w, nil)
+	err = ts.ExecuteTemplate(w, "base", nil)
 	if err != nil {
 		log.Print(err.Error())
 		http.Error(w, "Internal Server Error", 500)
